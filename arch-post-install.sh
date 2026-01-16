@@ -61,6 +61,11 @@ install_battery() {
     sudo systemctl mask systemd-rfkill.service systemd-rfkill.socket
 }
 
+install_intel() {
+    echo "Instalar drivers Intel"
+    sudo pacman -S --needed sudo pacman -S --needed vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader mesa
+}
+
 install_firmware() {
     echo "Instalar e atualizar firmware"
     sudo pacman -S --needed fwupd
@@ -82,6 +87,11 @@ set_fish_default() {
     echo "Fish será o shell padrão após logout/login."
 }
 
+install_ohmyposh(){
+    echo "Instalar oh-my-posh"
+    yay -S oh-my-posh
+}
+
 update_system() {
     echo "Atualizando sistema"
     sudo pacman -Syu
@@ -97,13 +107,15 @@ echo "1. Editar arquivo de configuração pacman"
 echo "2. Atualizar sistema"
 echo "3. Ativar amplificação nativa de áudio (GNOME)"
 echo "4. Instalar plugins, codecs e VLC"
-echo "5. Instalar AUR (yay) e Flatpak"
-echo "6. Instalar fontes essenciais"
-echo "7. Otimizar bateria (TLP)"
-echo "8. Atualizar firmware"
-echo "9. Instalar Fish shell"
-echo "10. Definir Fish como shell padrão"
-echo "11. Sair"
+echo "5. Instalar drivers Intel"
+echo "6. Instalar AUR (yay) e Flatpak"
+echo "7. Instalar fontes essenciais"
+echo "8. Otimizar bateria (TLP)"
+echo "9. Atualizar firmware"
+echo "10. Instalar Fish shell"
+echo "11. Definir Fish como shell padrão"
+echo "12. Instalar oh-my-posh"
+echo "13. Sair"
 echo ""
 
 read -p "Digite o número da opção desejada: " option
@@ -113,12 +125,14 @@ case $option in
     2) update_system ;;
     3) active_audio ;;
     4) install_audio ;;
-    5) install_aur_flatpak ;;
-    6) install_fonts ;;
-    7) install_battery ;;
-    8) install_firmware ;;
-    9) install_fish ;;
-    10) set_fish_default ;;
-    11) exit 0 ;;
+    5) install_intel ;;
+    6) install_aur_flatpak ;;
+    7) install_fonts ;;
+    8) install_battery ;;
+    9) install_firmware ;;
+    10) install_fish ;;
+    11) set_fish_default ;;
+    12) install_ohmyposh ;;
+    13) exit 0 ;;
     *) echo "Opção inválida" ;;
 esac
