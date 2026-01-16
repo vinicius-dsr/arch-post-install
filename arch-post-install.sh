@@ -2,6 +2,12 @@
 
 # ================= FUNÇÕES =================
 
+edit_pacman(){
+    echo "Editar arquivo de configuração pacman"
+    sudo mv /etc/pacman.conf /etc/pacman.conf.bak
+    sudo cp pacman.conf /etc/
+}
+
 active_audio() {
     echo "Ativar amplificação nativa de áudio (GNOME)"
     if command -v gsettings &>/dev/null; then
@@ -87,30 +93,32 @@ echo "===================================================="
 echo " Script de pós-instalação do Arch Linux (2026)"
 echo "===================================================="
 echo ""
-echo "1. Atualizar sistema"
-echo "2. Ativar amplificação nativa de áudio (GNOME)"
-echo "3. Instalar plugins, codecs e VLC"
-echo "4. Instalar AUR (yay) e Flatpak"
-echo "5. Instalar fontes essenciais"
-echo "6. Otimizar bateria (TLP)"
-echo "7. Atualizar firmware"
-echo "8. Instalar Fish shell"
-echo "9. Definir Fish como shell padrão"
-echo "10. Sair"
+echo "1. Editar arquivo de configuração pacman"
+echo "2. Atualizar sistema"
+echo "3. Ativar amplificação nativa de áudio (GNOME)"
+echo "4. Instalar plugins, codecs e VLC"
+echo "5. Instalar AUR (yay) e Flatpak"
+echo "6. Instalar fontes essenciais"
+echo "7. Otimizar bateria (TLP)"
+echo "8. Atualizar firmware"
+echo "9. Instalar Fish shell"
+echo "10. Definir Fish como shell padrão"
+echo "11. Sair"
 echo ""
 
 read -p "Digite o número da opção desejada: " option
 
 case $option in
-    1) update_system ;;
-    2) active_audio ;;
-    3) install_audio ;;
-    4) install_aur_flatpak ;;
-    5) install_fonts ;;
-    6) install_battery ;;
-    7) install_firmware ;;
-    8) install_fish ;;
-    9) set_fish_default ;;
-    10) exit 0 ;;
+    1) edit_pacman ;;
+    2) update_system ;;
+    3) active_audio ;;
+    4) install_audio ;;
+    5) install_aur_flatpak ;;
+    6) install_fonts ;;
+    7) install_battery ;;
+    8) install_firmware ;;
+    9) install_fish ;;
+    10) set_fish_default ;;
+    11) exit 0 ;;
     *) echo "Opção inválida" ;;
 esac
