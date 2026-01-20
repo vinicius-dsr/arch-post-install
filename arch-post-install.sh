@@ -63,7 +63,7 @@ install_battery() {
 
 install_intel() {
     echo "Instalar drivers Intel"
-    sudo pacman -S --needed sudo pacman -S --needed vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader mesa
+    sudo pacman -S --needed vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader mesa
 }
 
 install_firmware() {
