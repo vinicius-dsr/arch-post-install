@@ -27,7 +27,8 @@ install_audio() {
         gst-plugins-bad \
         gst-plugins-ugly \
         gst-libav \
-        vlc
+        vlc \
+        vlc-plugins-all
 }
 
 install_aur_flatpak() {
