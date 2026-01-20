@@ -64,7 +64,11 @@ install_battery() {
 
 install_intel() {
     echo "Instalar drivers Intel"
-    sudo pacman -S --needed vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader mesa
+    sudo pacman -S --needed \
+      vulkan-intel \
+      lib32-vulkan-intel \
+      vulkan-icd-loader \
+      lib32-vulkan-icd-loader mesa
 }
 
 install_firmware() {
@@ -100,40 +104,80 @@ update_system() {
 
 # ================= MENU =================
 
-echo "===================================================="
-echo " Script de pós-instalação do Arch Linux (2026)"
-echo "===================================================="
-echo ""
-echo "1. Editar arquivo de configuração pacman"
-echo "2. Atualizar sistema"
-echo "3. Ativar amplificação nativa de áudio (GNOME)"
-echo "4. Instalar plugins, codecs e VLC"
-echo "5. Instalar drivers Intel"
-echo "6. Instalar AUR (yay) e Flatpak"
-echo "7. Instalar fontes essenciais"
-echo "8. Otimizar bateria (TLP)"
-echo "9. Atualizar firmware"
-echo "10. Instalar Fish shell"
-echo "11. Definir Fish como shell padrão"
-echo "12. Instalar oh-my-posh"
-echo "13. Sair"
-echo ""
+while true; do
+    clear
+    echo "===================================================="
+    echo " Script de pós-instalação do Arch Linux (2026)"
+    echo "===================================================="
+    echo ""
+    echo "1. Editar arquivo de configuração pacman"
+    echo "2. Atualizar sistema"
+    echo "3. Ativar amplificação nativa de áudio (GNOME)"
+    echo "4. Instalar plugins, codecs e VLC"
+    echo "5. Instalar drivers Intel"
+    echo "6. Instalar AUR (yay) e Flatpak"
+    echo "7. Instalar fontes essenciais"
+    echo "8. Otimizar bateria (TLP)"
+    echo "9. Atualizar firmware"
+    echo "10. Instalar Fish shell"
+    echo "11. Definir Fish como shell padrão"
+    echo "12. Instalar oh-my-posh"
+    echo ""
+    echo "99. Instalação COMPLETA"
+    echo "0. Sair"
+    echo ""
 
-read -p "Digite o número da opção desejada: " option
+    read -p "Digite as opções desejadas (ex: 2 4 6 ou 99): " options
 
-case $option in
-    1) edit_pacman ;;
-    2) update_system ;;
-    3) active_audio ;;
-    4) install_audio ;;
-    5) install_intel ;;
-    6) install_aur_flatpak ;;
-    7) install_fonts ;;
-    8) install_battery ;;
-    9) install_firmware ;;
-    10) install_fish ;;
-    11) set_fish_default ;;
-    12) install_ohmyposh ;;
-    13) exit 0 ;;
-    *) echo "Opção inválida" ;;
-esac
+    options="${options//,/ }"
+
+    echo ""
+    echo "Você escolheu: $options"
+    read -p "Deseja continuar? [s/N]: " confirm
+    [[ "$confirm" != "s" && "$confirm" != "S" ]] && continue
+
+    for option in $options; do
+        case $option in
+            1) edit_pacman ;;
+            2) update_system ;;
+            3) active_audio ;;
+            4) install_audio ;;
+            5) install_intel ;;
+            6) install_aur_flatpak ;;
+            7) install_fonts ;;
+            8) install_battery ;;
+            9) install_firmware ;;
+            10) install_fish ;;
+            11) set_fish_default ;;
+            12) install_ohmyposh ;;
+
+            99)
+                echo "Executando instalação completa..."
+                edit_pacman
+                update_system
+                active_audio
+                install_audio
+                install_intel
+                install_aur_flatpak
+                install_fonts
+                install_battery
+                install_firmware
+                install_fish
+                set_fish_default
+                install_ohmyposh
+                ;;
+
+            0)
+                echo "Saindo..."
+                exit 0
+                ;;
+
+            *)
+                echo "Opção inválida: $option"
+                ;;
+        esac
+    done
+
+    echo ""
+    read -p "Pressione ENTER para voltar ao menu..."
+done
