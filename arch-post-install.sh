@@ -85,10 +85,15 @@ install_fish() {
 
 set_fish_default() {
     echo "Definir Fish como shell padrão"
-    if ! grep -q "$(command -v fish)" /etc/shells; then
-        command -v fish | sudo tee -a /etc/shells
+    fish_path="$(command -v fish)"
+    if [ -z "$fish_path" ]; then
+        echo "Fish não encontrado. Instale o Fish antes de definir como padrão."
+        return 1
     fi
-    chsh -s "$(command -v fish)"
+    if ! grep -Fxq "$fish_path" /etc/shells; then
+        echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
+    fi
+    chsh -s "$fish_path"
     echo "Fish será o shell padrão após logout/login."
 }
 
