@@ -71,6 +71,17 @@ install_intel() {
       lib32-vulkan-icd-loader mesa
 }
 
+install_nvidia() {
+    echo "Instalar drivers NVIDIA"
+    sudo pacman -S --needed \
+        nvidia \
+        nvidia-settings \
+        nvidia-utils \
+        lib32-nvidia-utils \
+        opencl-nvidia \
+        lib32-opencl-nvidia
+}
+
 install_firmware() {
     echo "Instalar e atualizar firmware"
     sudo pacman -S --needed fwupd
@@ -120,13 +131,14 @@ while true; do
     echo "3. Ativar amplificação nativa de áudio (GNOME)"
     echo "4. Instalar plugins, codecs e VLC"
     echo "5. Instalar drivers Intel"
-    echo "6. Instalar AUR (yay) e Flatpak"
-    echo "7. Instalar fontes essenciais"
-    echo "8. Otimizar bateria (TLP)"
-    echo "9. Atualizar firmware"
-    echo "10. Instalar Fish shell"
-    echo "11. Definir Fish como shell padrão"
-    echo "12. Instalar oh-my-posh"
+    echo "6. Instalar drivers NVIDIA"
+    echo "7. Instalar AUR (yay) e Flatpak"
+    echo "8. Instalar fontes essenciais"
+    echo "9. Otimizar bateria (TLP)"
+    echo "10. Atualizar firmware"
+    echo "11. Instalar Fish shell"
+    echo "12. Definir Fish como shell padrão"
+    echo "13. Instalar oh-my-posh"
     echo ""
     echo "99. Instalação COMPLETA"
     echo "0. Sair"
@@ -148,13 +160,14 @@ while true; do
             3) active_audio ;;
             4) install_audio ;;
             5) install_intel ;;
-            6) install_aur_flatpak ;;
-            7) install_fonts ;;
-            8) install_battery ;;
-            9) install_firmware ;;
-            10) install_fish ;;
-            11) set_fish_default ;;
-            12) install_ohmyposh ;;
+            6) install_nvidia ;;
+            7) install_aur_flatpak ;;
+            8) install_fonts ;;
+            9) install_battery ;;
+            10) install_firmware ;;
+            11) install_fish ;;
+            12) set_fish_default ;;
+            13) install_ohmyposh ;;
 
             99)
                 echo "Executando instalação completa..."
@@ -163,6 +176,7 @@ while true; do
                 active_audio
                 install_audio
                 install_intel
+                install_nvidia
                 install_aur_flatpak
                 install_fonts
                 install_battery
