@@ -113,6 +113,17 @@ install_ohmyposh(){
     yay -S oh-my-posh
 }
 
+install_cloudflare_warp(){
+    echo "Instalar Cloudflare WARP"
+    yay -S cloudflare-warp-bin
+    echo "Iniciando e habilitando serviço WARP..."
+    sudo systemctl start warp-svc
+    sudo systemctl enable warp-svc
+    echo "Para completar a configuração, execute manualmente:"
+    echo "  warp-cli registration new"
+    echo "  warp-cli connect"
+}
+
 update_system() {
     echo "Atualizando sistema"
     sudo pacman -Syu
@@ -139,6 +150,7 @@ while true; do
     echo "11. Instalar Fish shell"
     echo "12. Definir Fish como shell padrão"
     echo "13. Instalar oh-my-posh"
+    echo "14. Instalar Cloudflare WARP"
     echo ""
     echo "99. Instalação COMPLETA"
     echo "0. Sair"
@@ -168,6 +180,7 @@ while true; do
             11) install_fish ;;
             12) set_fish_default ;;
             13) install_ohmyposh ;;
+            14) install_cloudflare_warp ;;
 
             99)
                 echo "Executando instalação completa..."
@@ -184,6 +197,7 @@ while true; do
                 install_fish
                 set_fish_default
                 install_ohmyposh
+                install_cloudflare_warp
                 ;;
 
             0)
