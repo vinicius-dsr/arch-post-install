@@ -17,6 +17,10 @@ Este repositório contém um script para automatizar tarefas comuns logo após a
 11. Instala o Fish shell
 12. Define o Fish como shell padrão
 13. Instala o oh-my-posh
+14. Instalar Cloudflare WARP
+15. Instalar Zed Editor
+16. Instalar Zapfast(Whatsapp Client feito em Rust)
+17. Instalar Spotifast(Spotify Client feito em Rust)
 
 ## Como usar
 
