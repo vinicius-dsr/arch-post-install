@@ -124,6 +124,22 @@ install_cloudflare_warp(){
     echo "  warp-cli connect"
 }
 
+install_zapfast(){
+    echo "Instalando Zapfast"
+    yay -S zapfast-bin
+}
+
+install_spotifast(){
+    echo "Instalando Spotifast"
+    yay -S spotifast-bin
+}
+
+install_zed(){
+    echo "Instalando Zed Editor"
+    curl -f https://zed.dev/install.sh | sh
+}
+
+
 update_system() {
     echo "Atualizando sistema"
     sudo pacman -Syu
@@ -134,7 +150,7 @@ update_system() {
 while true; do
     clear
     echo "===================================================="
-    echo " Script de pós-instalação do Arch Linux (2026)"
+    echo " Script de pós-instalação do Arch Linux (2027)"
     echo "===================================================="
     echo ""
     echo "1. Editar arquivo de configuração pacman"
@@ -151,6 +167,9 @@ while true; do
     echo "12. Definir Fish como shell padrão"
     echo "13. Instalar oh-my-posh"
     echo "14. Instalar Cloudflare WARP"
+    echo "15. Instalar Zed Editor"
+    echo "16. Instalar Zapfast"
+    echo "17. Instalar Spotifast"
     echo ""
     echo "99. Instalação COMPLETA"
     echo "0. Sair"
@@ -181,6 +200,9 @@ while true; do
             12) set_fish_default ;;
             13) install_ohmyposh ;;
             14) install_cloudflare_warp ;;
+            15) install_zed ;;
+            16) install_zapfast ;;
+            17) install_spotifast ;;
 
             99)
                 echo "Executando instalação completa..."
@@ -198,6 +220,9 @@ while true; do
                 set_fish_default
                 install_ohmyposh
                 install_cloudflare_warp
+                install_zed
+                install_zapfast
+                install_spotifast
                 ;;
 
             0)
