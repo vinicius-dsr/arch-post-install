@@ -1,4 +1,11 @@
 #!/bin/bash
+# =================================================================
+# Nome do Script: arch-post-install.sh
+# Descrição: Script para atualizar o processo de pós instalação do Arch Linux
+# Autor: Vinícius Reis
+# Data de Criação: 15/01/2025
+# Versão: 1.0
+# =================================================================
 
 # ================= FUNÇÕES =================
 
