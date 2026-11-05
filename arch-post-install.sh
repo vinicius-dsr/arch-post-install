@@ -38,9 +38,9 @@ install_audio() {
         vlc-plugins-all
 }
 
-install_aur_flatpak() {
-    echo "Instalar AUR (yay) e Flatpak"
-    sudo pacman -S --needed base-devel git flatpak
+install_yay() {
+    echo "Instalar AUR (yay)"
+    sudo pacman -S --needed base-devel git
 
     if [ ! -d "yay" ]; then
         git clone https://aur.archlinux.org/yay.git
@@ -50,6 +50,11 @@ install_aur_flatpak() {
     else
         echo "yay já existe, pulando clone."
     fi
+}
+
+install_flatpak() {
+    echo "Instalar Flatpak"
+    sudo pacman -S --needed flatpak
 }
 
 install_fonts() {
@@ -96,16 +101,26 @@ install_firmware() {
     sudo fwupdmgr get-updates
 }
 
-install_fish() {
-    echo "Instalar Fish shell"
-    sudo pacman -S --needed fish
+set_bash_default() {
+    echo "Definir Bash como shell padrão"
+    bash_path="$(command -v bash)"
+    if [ -z "$bash_path" ]; then
+        echo "Bash não encontrado."
+        return 1
+    fi
+    if ! grep -Fxq "$bash_path" /etc/shells; then
+        echo "$bash_path" | sudo tee -a /etc/shells >/dev/null
+    fi
+    chsh -s "$bash_path"
+    echo "Bash será o shell padrão após logout/login."
 }
 
-set_fish_default() {
-    echo "Definir Fish como shell padrão"
+install_fish_default() {
+    echo "Instalar Fish shell e definir como shell padrão"
+    sudo pacman -S --needed fish
     fish_path="$(command -v fish)"
     if [ -z "$fish_path" ]; then
-        echo "Fish não encontrado. Instale o Fish antes de definir como padrão."
+        echo "Fish não encontrado."
         return 1
     fi
     if ! grep -Fxq "$fish_path" /etc/shells; then
@@ -166,17 +181,18 @@ while true; do
     echo "4. Instalar plugins, codecs e VLC"
     echo "5. Instalar drivers Intel"
     echo "6. Instalar drivers NVIDIA"
-    echo "7. Instalar AUR (yay) e Flatpak"
-    echo "8. Instalar fontes essenciais"
-    echo "9. Otimizar bateria (TLP)"
-    echo "10. Atualizar firmware"
-    echo "11. Instalar Fish shell"
-    echo "12. Definir Fish como shell padrão"
-    echo "13. Instalar oh-my-posh"
-    echo "14. Instalar Cloudflare WARP"
-    echo "15. Instalar Zed Editor"
-    echo "16. Instalar Zapfast"
-    echo "17. Instalar Spotifast"
+    echo "7. Instalar AUR (yay)"
+    echo "8. Instalar Flatpak"
+    echo "9. Instalar fontes essenciais"
+    echo "10. Otimizar bateria (TLP)"
+    echo "11. Atualizar firmware"
+    echo "12. Definir Bash como shell padrão"
+    echo "13. Instalar Fish e definir como shell padrão"
+    echo "14. Instalar oh-my-posh"
+    echo "15. Instalar Cloudflare WARP"
+    echo "16. Instalar Zed Editor"
+    echo "17. Instalar Zapfast"
+    echo "18. Instalar Spotifast"
     echo ""
     echo "99. Instalação COMPLETA"
     echo "0. Sair"
@@ -199,17 +215,18 @@ while true; do
             4) install_audio ;;
             5) install_intel ;;
             6) install_nvidia ;;
-            7) install_aur_flatpak ;;
-            8) install_fonts ;;
-            9) install_battery ;;
-            10) install_firmware ;;
-            11) install_fish ;;
-            12) set_fish_default ;;
-            13) install_ohmyposh ;;
-            14) install_cloudflare_warp ;;
-            15) install_zed ;;
-            16) install_zapfast ;;
-            17) install_spotifast ;;
+            7) install_yay ;;
+            8) install_flatpak ;;
+            9) install_fonts ;;
+            10) install_battery ;;
+            11) install_firmware ;;
+            12) set_bash_default ;;
+            13) install_fish_default ;;
+            14) install_ohmyposh ;;
+            15) install_cloudflare_warp ;;
+            16) install_zed ;;
+            17) install_zapfast ;;
+            18) install_spotifast ;;
 
             99)
                 echo "Executando instalação completa..."
@@ -219,12 +236,12 @@ while true; do
                 install_audio
                 install_intel
                 install_nvidia
-                install_aur_flatpak
+                install_yay
+                install_flatpak
                 install_fonts
                 install_battery
                 install_firmware
-                install_fish
-                set_fish_default
+                set_bash_default
                 install_ohmyposh
                 install_cloudflare_warp
                 install_zed

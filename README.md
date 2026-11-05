@@ -10,17 +10,18 @@ Este repositório contém um script para automatizar tarefas comuns logo após a
 4. Instala plugins, codecs e VLC
 5. Instala drivers Intel
 6. Instala drivers NVIDIA
-7. Instala AUR (`yay`) e Flatpak
-8. Instala fontes essenciais
-9. Otimiza a bateria (TLP)
-10. Atualiza o firmware
-11. Instala o Fish shell
-12. Define o Fish como shell padrão
-13. Instala o oh-my-posh
-14. Instalar Cloudflare WARP
-15. Instalar Zed Editor
-16. Instalar Zapfast(Whatsapp Client feito em Rust)
-17. Instalar Spotifast(Spotify Client feito em Rust)
+7. Instala AUR (`yay`)
+8. Instala Flatpak
+9. Instala fontes essenciais
+10. Otimiza a bateria (TLP)
+11. Atualiza o firmware
+12. Define o Bash como shell padrão
+13. Instala o Fish e define como shell padrão
+14. Instala o oh-my-posh
+15. Instalar Cloudflare WARP
+16. Instalar Zed Editor
+17. Instalar Zapfast(Whatsapp Client feito em Rust)
+18. Instalar Spotifast(Spotify Client feito em Rust)
 
 ## Como usar
 
